@@ -6,14 +6,14 @@ def search(pattern, text, prime_modulus):
     m = len(pattern)  # ნიმუშის სიგრძე
     n = len(text)  # ტექსტის სიგრძე
     hash_pattern = 0    # ნიმუშის ჰეშ-მნიშვნელობა
-    hash_text = 0    # ტექსტის ქვეწინადის ჰეშ-მნიშვნელობა
+    hash_text = 0    # ტექსტის ქვეწინადადების ჰეშ-მნიშვნელობა
     h = 1  # წინასწარი მნიშვნელობა, რომელიც გამოიყენება ჰეშის განახლებისთვის
 
     # ჰეშ-ის განახლების დაწყება
     for i in range(m-1):
         h = (h*d) % prime_modulus
 
-    # ნიმუშის და პირველი ქვეწინადის ჰეშ-ფუნქციების გამოთვლა
+    # ნიმუშის და პირველი ქვეწინადადების ჰეშ-ფუნქციების გამოთვლა
     for i in range(m):
         hash_pattern = (d*hash_pattern + ord(pattern[i])) % prime_modulus
         hash_text = (d*hash_text + ord(text[i])) % prime_modulus
@@ -28,7 +28,7 @@ def search(pattern, text, prime_modulus):
             else:
                 print("Pattern found at index " + str(i))
 
-        # შემდეგი ქვეწინადის ჰეშ-ფუნქციის გამოთვლა
+        # შემდეგი ქვეწინადადების ჰეშ-ფუნქციის გამოთვლა
         if i < n-m:
             hash_text = (d*(hash_text - ord(text[i])*h) + ord(text[i+m])) % prime_modulus
             if hash_text < 0:
