@@ -50,6 +50,8 @@ if __name__ == "__main__":
     for x in a:
         h.insertItem(x)
 
+    h.displayHash()
+    print("-----------------")
     # delete 12 from the hash table
     h.deleteItem(x)
     # Display the hash table
