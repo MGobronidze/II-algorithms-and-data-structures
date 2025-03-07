@@ -1,66 +1,45 @@
-# Following program is the python implementation of
-# Rabin Karp Algorithm given in CLRS book
+# d - ალფავიტში სიმბოლოების რაოდენობა
+d = 256  # ჩვეულებრივ ASCII სიმბოლოებისთვის
 
-# d is the number of characters in the input alphabet
-d = 256
+# ნიმუშის (pattern) და ტექსტის (text) შერჩევა
+def search(pattern, text, prime_modulus):
+    m = len(pattern)  # ნიმუშის სიგრძე
+    n = len(text)  # ტექსტის სიგრძე
+    hash_pattern = 0    # ნიმუშის ჰეშ-მნიშვნელობა
+    hash_text = 0    # ტექსტის ქვეწინადის ჰეშ-მნიშვნელობა
+    h = 1  # წინასწარი მნიშვნელობა, რომელიც გამოიყენება ჰეშის განახლებისთვის
 
-# Search the pat string in the txt string
-def search(pat, txt, q):
-    M = len(pat)
-    N = len(txt)
-    i = 0
-    j = 0
-    p = 0    # hash value for pattern
-    t = 0    # hash value for txt
-    h = 1
+    # ჰეშ-ის განახლების დაწყება
+    for i in range(m-1):
+        h = (h*d) % prime_modulus
 
-    # The value of h would be "pow(d, M-1)%q"
-    for i in range(M-1):
-        h = (h*d) % q
+    # ნიმუშის და პირველი ქვეწინადის ჰეშ-ფუნქციების გამოთვლა
+    for i in range(m):
+        hash_pattern = (d*hash_pattern + ord(pattern[i])) % prime_modulus
+        hash_text = (d*hash_text + ord(text[i])) % prime_modulus
 
-    # Calculate the hash value of pattern and first window
-    # of text
-    for i in range(M):
-        p = (d*p + ord(pat[i])) % q
-        t = (d*t + ord(txt[i])) % q
-
-    # Slide the pattern over text one by one
-    for i in range(N-M+1):
-        # Check the hash values of current window of text and
-        # pattern if the hash values match then only check
-        # for characters one by one
-        if p == t:
-            # Check for characters one by one
-            for j in range(M):
-                if txt[i+j] != pat[j]:
+    # ნიმუშის გადაადგილება ტექსტში
+    for i in range(n-m+1):
+        # თუ ჰეშ-მნიშვნელობები ემთხვევა, შეამოწმე სიმბოლოები
+        if hash_pattern == hash_text:
+            for j in range(m):
+                if text[i+j] != pattern[j]:
                     break
-                else:
-                    j += 1
-
-            # if p == t and pat[0...M-1] = txt[i, i+1, ...i+M-1]
-            if j == M:
+            else:
                 print("Pattern found at index " + str(i))
 
-        # Calculate hash value for next window of text: Remove
-        # leading digit, add trailing digit
-        if i < N-M:
-            t = (d*(t-ord(txt[i])*h) + ord(txt[i+M])) % q
-
-            # We might get negative values of t, converting it to
-            # positive
-            if t < 0:
-                t = t+q
-
+        # შემდეგი ქვეწინადის ჰეშ-ფუნქციის გამოთვლა
+        if i < n-m:
+            hash_text = (d*(hash_text - ord(text[i])*h) + ord(text[i+m])) % prime_modulus
+            if hash_text < 0:
+                hash_text = hash_text + prime_modulus
 
 # Driver Code
 if __name__ == '__main__':
-    txt = "GEEKS FOR GEEKS"
-    pat = "GEEK"
+    text = "GEEKS FOR GEEKS"
+    pattern = "GEEK"
 
-    # A prime number
-    q = 101
+    prime_modulus = 101
 
-    # Function Call
-    search(pat, txt, q)
-
-# This code is contributed by Bhavya Jain
+    # ფუნქციის გამოძახება
+    search(pattern, text, prime_modulus)
