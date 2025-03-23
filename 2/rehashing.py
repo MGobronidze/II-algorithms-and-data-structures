@@ -56,13 +56,13 @@ class Hash:
 # Driver program
 if __name__ == "__main__":
     # List that contains keys to be mapped
-    a = [15, 11, 27, 8, 12]
+    a = [15, 11, 12]
 
     # Insert the keys into the hash table
     h = Hash(7)  # 7 is the number of buckets in the hash table
     for key in a:
         h.insertItem(key)
-
+    h.displayHash()
     # Delete 12 from the hash table
     h.deleteItem(12)
 
