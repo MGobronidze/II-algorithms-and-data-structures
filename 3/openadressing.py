@@ -5,8 +5,6 @@ class HashNode:
         self.value = value
 
 # Our own Hashmap class
-
-
 class HashMap:
     # hash element array
     def __init__(self):
@@ -34,7 +32,7 @@ class HashMap:
             self.size += 1
         self.arr[hashIndex] = temp
 
-    # Function to delete a key value pair
+    # Function to delete a key value pair 
     def deleteNode(self, key):
         # Apply hash function to find index for given key
         hashIndex = self.hashCode(key)
