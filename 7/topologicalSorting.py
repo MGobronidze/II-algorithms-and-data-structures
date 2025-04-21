@@ -11,7 +11,7 @@ def topologicalSortUtil(v, adj, visited, stack):
     # Push current vertex to stack which stores the result
     stack.append(v)
 
-
+# construct adj list
 def constructadj(V, edges):
     adj = [[] for _ in range(V)]
 
