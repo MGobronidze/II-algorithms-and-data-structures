@@ -48,7 +48,7 @@ class Graph:
 		# Sort starting from source vertices
 		for i in range(self.V):
 			if visited[i] == False:
-				self.topologicalSortUtil(s,visited,stack)
+				self.topologicalSortUtil(i,visited,stack)
 
 		# Initialize distances to all vertices as infinite and
 		# distance to source as 0
