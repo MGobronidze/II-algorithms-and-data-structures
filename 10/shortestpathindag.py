@@ -87,5 +87,3 @@ s = 1
 
 print ("Following are shortest distances from source %d " % s)
 g.shortestPath(s)
-
-# This code is contributed by Neelam Yadav
