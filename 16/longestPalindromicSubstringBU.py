@@ -47,6 +47,6 @@ test_cases = [
 for idx, test in enumerate(test_cases, 1):
     result = longestPalindrome(test["input"])
     if result in test["expected_outputs"]:
-        print(f"✅ Example {idx} Passed: Output = \"{result}\"")
+        print(f"Example {idx} Passed: Output = \"{result}\"")
     else:
-        print(f"❌ Example {idx} Failed: Output = \"{result}\", Expected one of {test['expected_outputs']}")
+        print(f"Example {idx} Failed: Output = \"{result}\", Expected one of {test['expected_outputs']}")
